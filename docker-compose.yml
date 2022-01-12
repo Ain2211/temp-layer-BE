@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0.25
+    container_name: layer-mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode="" --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_DATABASE: LayerBackend
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: '123456'
+      LANG: C.UTF-8
+    volumes:
+      - './docker/mysql/data/db:/var/lib/mysql'
+      - './docker/mysql/mnt:/mnt'
+    ports:
+      - 3306:3306
+  # app:
+  #   build: .
+  #   container_name: layer-backend
+  #   image: layer-exchange/backend
+  #   user: node
+  #   ports:
+  #     - 3003:3003
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - mysql
+
+  # # rebalancer1:
+  # #   image: layer-exchange/backend
+  # #   container_name: layer-rebalancer-1
+  # #   user: node
+  # #   command: yarn console rebalance $REBALANCER1_ID
+  # #   env_file:
+  # #     - .env
+  # #   depends_on:
+  # #     - mysql
+
+  # nginx:
+  #   image: nginx:1.21-alpine
+  #   container_name: layer-nginx
+  #   ports:
+  #     - 3004:80
+  #     - 3005:443
+  #   volumes:
+  #     - ./docker/nginx/conf.d:/etc/nginx/conf.d
+  #     - ./docker/nginx/cert/server.pem:/etc/ssl/certs/sever.pem
+  #     - ./docker/nginx/cert/private-key.pem:/etc/ssl/private/private-key.pem
+  #   depends_on:
+  #     - app

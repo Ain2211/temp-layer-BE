@@ -1,0 +1,7 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+*/1  *  * * *  cd /home/william_cuong_tran/layer-backend && ./subgraph-crawler.sh >> /home/william_cuong_tran/layer-backend-logs/subgraph-crawler.log 2>&1
+*/1  *  * * *  cd /home/william_cuong_tran/layer-backend && ./start-rebalance.sh >> /home/william_cuong_tran/layer-backend-logs/start-rebalance.log 2>&1
+*/1  *  * * *  cd /home/william_cuong_tran/layer-backend && ./stop-rebalance.sh >> /home/william_cuong_tran/layer-backend-logs/stop-rebalance.log 2>&1
